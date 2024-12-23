@@ -7,7 +7,7 @@ const travels = Array.from({ length: 50 }, (_, i) => ({
 }));
 
 const routes = {
-    'Bandung-Cikarang': 120,
+    'Bandung-Cikarang': 110,
     'Bandung-Jakarta': 150,
     'Jakarta-Cikarang': 40,
     'Bandung-Tangerang': 180,
