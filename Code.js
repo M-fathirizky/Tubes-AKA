@@ -23,7 +23,7 @@ function searchTravel() {
 
     // Recursive sorting
     const recursiveStart = performance.now();
-    const recursiveResult = recursiveSort([...travels]);
+    const recursiveResult = recursiveBubbleSort([...travels], travels.length);
     const recursiveEnd = performance.now();
 
     // Display results
@@ -44,29 +44,17 @@ function iterativeSort(travels) {
     return travels;
 }
 
-// Recursive sorting (Merge Sort)
-function recursiveSort(travels) {
-    if (travels.length <= 1) return travels;
+// Recursive sorting (Bubble Sort)
+function recursiveBubbleSort(travels, n) {
+    if (n === 1) return travels; // Base case
 
-    const mid = Math.floor(travels.length / 2);
-    const left = recursiveSort(travels.slice(0, mid));
-    const right = recursiveSort(travels.slice(mid));
-
-    return merge(left, right);
-}
-
-function merge(left, right) {
-    let result = [];
-    let l = 0, r = 0;
-
-    while (l < left.length && r < right.length) {
-        if (left[l].efficiency < right[r].efficiency) {
-            result.push(left[l++]);
-        } else {
-            result.push(right[r++]);
+    for (let i = 0; i < n - 1; i++) {
+        if (travels[i].efficiency > travels[i + 1].efficiency) {
+            [travels[i], travels[i + 1]] = [travels[i + 1], travels[i]];
         }
     }
-    return result.concat(left.slice(l)).concat(right.slice(r));
+
+    return recursiveBubbleSort(travels, n - 1); // Recursive call
 }
 
 // Format travels for display
